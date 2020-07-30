@@ -4,14 +4,6 @@ from loss_function import Tacotron2Loss
 from argparse import Namespace
 from text import symbols
 
-def skipIfNotImplemented(func):
-    def wrapper(*args, **kwargs):
-        try:
-            func(*args, **kwargs)
-        except NotImplementedError:
-            print('skipped since {} is not implemented'.format(func.__name__))
-    return wrapper
-
 class Model:
     def __init__(self, device='cpu', jit=False):
         """ Required """
@@ -114,7 +106,6 @@ class Model:
     def get_module(self):
         return self.model, (self.example_input,)
 
-    @skipIfNotImplemented
     def train(self, niterations=1):
         self.model.train()
         for _ in range(niterations):
@@ -126,7 +117,6 @@ class Model:
             self.optimizer.step()
 
 
-    @skipIfNotImplemented
     def eval(self, niterations=1):
         self.model.eval()
         for _ in range(niterations):
