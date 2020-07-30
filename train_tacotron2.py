@@ -13,8 +13,7 @@ from torch.utils.data import DataLoader
 from model import Tacotron2
 from data_utils import TextMelLoader, TextMelCollate
 from loss_function import Tacotron2Loss
-from logger import Tacotron2Logger
-from hparams import create_hparams
+# from hparams import create_hparams
 
 
 def reduce_tensor(tensor, n_gpus):
@@ -64,7 +63,8 @@ def prepare_directories_and_logger(output_directory, log_directory, rank):
         if not os.path.isdir(output_directory):
             os.makedirs(output_directory)
             os.chmod(output_directory, 0o775)
-        logger = Tacotron2Logger(os.path.join(output_directory, log_directory))
+        # logger = Tacotron2Logger(os.path.join(output_directory, log_directory))
+        logger = None
     else:
         logger = None
     return logger
